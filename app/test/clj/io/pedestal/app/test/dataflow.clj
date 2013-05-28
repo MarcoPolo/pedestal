@@ -382,7 +382,14 @@
                      :input-paths #{[:a :* :g] [:b]}})
          {[:a 0 :g] 1
           [:a 1 :g] 2
-          [:b]      5})))
+          [:b]      5}))
+  (is (= (input-map {:new-model {:a false
+                                 :b nil
+                                 :c true}
+                     :input-paths #{[:*]}})
+         {[:a] false
+          [:b] nil
+          [:c] true})))
 
 (deftest test-input-vals
   (is (= (set (input-vals {:new-model {:a 3 :b 5}
