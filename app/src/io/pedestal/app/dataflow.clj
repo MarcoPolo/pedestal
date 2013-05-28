@@ -318,14 +318,14 @@
   ([data context [x & xs]]
      (if x
        (if (= x :*)
-         (mapcat #(get-path (get data %) (conj context %) xs) (keys data))
-         (get-path (get data x) (conj context x) xs))
+         (mapcat #(get-path (get data % ::nil) (conj context %) xs) (keys data))
+         (get-path (get data x ::nil) (conj context x) xs))
        [[context data]])))
 
 (defn input-map [{:keys [new-model input-paths]}]
   (into {} (for [path input-paths
                  [k v] (get-path new-model path)
-                 :when v]
+                 :when (not= v ::nil)]
              [k v])))
 
 (defn input-vals [inputs]
